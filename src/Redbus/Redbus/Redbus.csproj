@@ -2,7 +2,7 @@
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{80768212-79B9-45D7-84B4-B4CD8524F470}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -42,6 +42,7 @@
     <Compile Include="EventBus.cs" />
     <Compile Include="Events\EventBase.cs" />
     <Compile Include="Events\PayloadEvent.cs" />
+    <Compile Include="Extensions\RedBusExtensions.cs" />
     <Compile Include="Interfaces\IEventBus.cs" />
     <Compile Include="Interfaces\ISubscription.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
