@@ -1,1 +1,1 @@
-.\src\Nuget\NuGet.exe pack .\src\Redbus\Redbus\Redbus.nuspec 
+.\src\Nuget\NuGet.exe pack .\src\Redbus\Redbus\Redbus.csproj 
