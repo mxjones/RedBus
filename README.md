@@ -51,6 +51,23 @@ eventBus.Unsubscribe(token);
 
 ```
 
+Extensions
+
+```csharp
+
+IEventBus eventBus = new EventBus();
+var token = eventBus.Subscribe<PayloadEvent<string>>(s =>
+{
+  Console.WriteLine(s.Payload);
+});
+
+token.Unsubscribe(eventBus)
+
+var payloadEvent = new PayloadEvent<string>("Hello");
+payloadEvent.Publish(eventBus);
+
+```
+
 
 # Nuget
 
