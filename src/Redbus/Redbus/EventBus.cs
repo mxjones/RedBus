@@ -76,15 +76,15 @@ namespace Redbus
                     allSubscriptions = _subscriptions[typeof(TEventBase)];
             }
 
-            foreach (var subscription in allSubscriptions)
+            for (var index = 0; index < allSubscriptions.Count; index++)
             {
+                var subscription = allSubscriptions[index];
                 try
                 {
                     subscription.Publish(eventItem);
                 }
                 catch (Exception exception)
                 {
-
                 }
             }
         }
