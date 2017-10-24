@@ -25,7 +25,7 @@ namespace Redbus
         public SubscriptionToken Subscribe<TEventBase>(Action<TEventBase> action) where TEventBase : EventBase
         {
             if (action == null)
-                throw new ArgumentNullException("action");
+                throw new ArgumentNullException(nameof(action));
 
             lock (SubscriptionsLock)
             {
@@ -45,7 +45,7 @@ namespace Redbus
         public void Unsubscribe(SubscriptionToken token)
         {
             if (token == null)
-                throw new ArgumentNullException("token");
+                throw new ArgumentNullException(nameof(token));
 
             lock (SubscriptionsLock)
             {
@@ -67,7 +67,7 @@ namespace Redbus
         public void Publish<TEventBase>(TEventBase eventItem) where TEventBase : EventBase
         {
             if (eventItem == null)
-                throw new ArgumentNullException("eventItem");
+                throw new ArgumentNullException(nameof(eventItem));
 
             List<ISubscription> allSubscriptions = new List<ISubscription>();
             lock (SubscriptionsLock)

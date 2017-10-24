@@ -9,14 +9,12 @@ namespace Redbus
     {
         internal SubscriptionToken(Type eventItemType)
         {
-            _uniqueTokenId = Guid.NewGuid();
-            _eventItemType = eventItemType;
+            Token = Guid.NewGuid();
+            EventItemType = eventItemType;
         }
         
-        public Guid Token { get { return _uniqueTokenId; } }
-        public Type EventItemType { get { return _eventItemType; } }
+        public Guid Token { get; }
 
-        private readonly Guid _uniqueTokenId;
-        private readonly Type _eventItemType;
+        public Type EventItemType { get; }
     }
 }
