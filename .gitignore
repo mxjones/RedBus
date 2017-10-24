@@ -45,3 +45,12 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
+packages
+*\.vs
