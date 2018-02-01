@@ -36,8 +36,7 @@ private void OnIntEvent(PayloadEvent<int> intEvent)
 }
 ```
 
-Note that RedBus does not have WeakReferences implemented, so you must explicitly call Unsubscribe for the event when disposing
-the subscriber to avoid memory leaks. The Subscribe method returns a SubscriptionToken, this is used when unsubscribing.
+RedBus implements WeakReferences, so it's not required to explicitly call Unsubscribe for the event when disposing the subscriber. The Subscribe method returns a SubscriptionToken, this is used when unsubscribing.
 
 ```csharp
 
