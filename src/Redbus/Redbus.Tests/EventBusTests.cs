@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Redbus.Events;
 
@@ -24,7 +25,7 @@ namespace Redbus.Tests
             eventBus.Subscribe<CustomTestEvent>(CustomTestEventMethodHandler);
 
             Assert.IsFalse(_methodHandlerHit);
-            eventBus.Publish(new CustomTestEvent { Name = "Custom Event", Identifier = 1});
+            eventBus.Publish(new CustomTestEvent { Name = "Custom Event", Identifier = 1 });
             Assert.IsTrue(_methodHandlerHit);
         }
 
@@ -71,7 +72,7 @@ namespace Redbus.Tests
                 customTestEventResults.Add(s);
             });
 
-            eventBus.Publish(new CustomTestEvent { Name = "Custom Test Event", Identifier = 1});
+            eventBus.Publish(new CustomTestEvent { Name = "Custom Test Event", Identifier = 1 });
             eventBus.Publish(new CustomTestEvent { Name = "Custom Test Event", Identifier = 2 });
             eventBus.Publish(new CustomTestEvent { Name = "Custom Test Event", Identifier = 3 });
             eventBus.Publish(new CustomTestEvent { Name = "Custom Test Event", Identifier = 4 });
@@ -95,7 +96,7 @@ namespace Redbus.Tests
             {
                 Assert.Fail("This should not be executed due to unsubscribing.");
             });
-            
+
             eventBus.Unsubscribe(token);
             eventBus.Publish(new CustomTestEvent { Name = "Custom Event 3", Identifier = 3 });
         }
@@ -113,6 +114,37 @@ namespace Redbus.Tests
             eventBus.Unsubscribe(token);
             eventBus.Unsubscribe(token);
             eventBus.Unsubscribe(token);
+        }
+
+        [TestMethod]
+        public void SubscribedObjectDoesNotLeak()
+        {
+            var eventBus = new EventBus();
+            SubscriptionToken token = null;
+
+            WeakReference subscriberReference = CallInItsOwnScope(() =>
+            {
+                using (var subscriber = new TestSubscriber())
+                {
+                    subscriberReference = new WeakReference(subscriber);
+                    token = subscriber.DoSubscribe(eventBus);
+                    eventBus.Publish(new CustomTestEvent { Name = "Received Event / received", Identifier = 1 });
+                }
+                return subscriberReference;
+            });
+
+            eventBus.Publish(new CustomTestEvent { Name = "Before GC Collect / received", Identifier = 2 });
+            GC.Collect();
+
+            eventBus.Publish(new CustomTestEvent { Name = "After GC Collect / lost", Identifier = 3 });
+
+            bool result = subscriberReference.IsAlive;
+            Assert.IsFalse(result);
+        }
+
+        private T CallInItsOwnScope<T>(Func<T> getter)
+        {
+            return getter();
         }
 
         private void CustomTestEventMethodHandler(CustomTestEvent customTestEvent)

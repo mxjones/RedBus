@@ -10,7 +10,7 @@ namespace Redbus
 
         public Subscription(Action<TEventBase> action, SubscriptionToken token)
         {
-            _action = action ?? throw new ArgumentNullException(nameof(action));
+            _action = new WeakReference<Action<TEventBase>>(action ?? throw new ArgumentNullException(nameof(action)));
             SubscriptionToken = token ?? throw new ArgumentNullException(nameof(token));
         }
 
@@ -19,9 +19,13 @@ namespace Redbus
             if (!(eventItem is TEventBase))
                 throw new ArgumentException("Event Item is not the correct type.");
 
-            _action.Invoke(eventItem as TEventBase);
+            Action<TEventBase> action;
+            if (_action.TryGetTarget(out action))
+                action.Invoke(eventItem as TEventBase);
+            else
+                throw new SubscriptionExpiredException(this);
         }
 
-        private readonly Action<TEventBase> _action;
+        private readonly WeakReference<Action<TEventBase>> _action;
     }
 }

@@ -76,6 +76,7 @@ namespace Redbus
                     allSubscriptions = _subscriptions[typeof(TEventBase)];
             }
 
+            List<ISubscription> toRemove = new List<ISubscription>();
             for (var index = 0; index < allSubscriptions.Count; index++)
             {
                 var subscription = allSubscriptions[index];
@@ -83,8 +84,24 @@ namespace Redbus
                 {
                     subscription.Publish(eventItem);
                 }
+                catch (SubscriptionExpiredException see)
+                {
+                    toRemove.Add(see.Subscription);
+                }
                 catch (Exception exception)
                 {
+                }
+            }
+            if (toRemove.Any())
+            {
+                lock (SubscriptionsLock)
+                {
+                    if (_subscriptions.ContainsKey(typeof(TEventBase)))
+                    {
+                        var subscriptionsList = _subscriptions[typeof(TEventBase)];
+                        foreach (var subscription in toRemove)
+                            subscriptionsList.Remove(subscription);
+                    }
                 }
             }
         }
