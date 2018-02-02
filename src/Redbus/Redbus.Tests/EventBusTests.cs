@@ -142,6 +142,18 @@ namespace Redbus.Tests
             Assert.IsFalse(result);
         }
 
+        [TestMethod]
+        public void UseEventBusDefaultInstanceTest()
+        {
+            var eventBus = EventBus.DefaultInstance;
+            var token = eventBus.Subscribe<CustomTestEvent>(CustomTestEventMethodHandler);
+            _methodHandlerHit = false;
+            Assert.IsFalse(_methodHandlerHit);
+            eventBus.Publish(new CustomTestEvent { Name = "Custom Event", Identifier = 1 });
+            Assert.IsTrue(_methodHandlerHit);
+            eventBus.Unsubscribe(token);
+        }
+
         private T CallInItsOwnScope<T>(Func<T> getter)
         {
             return getter();

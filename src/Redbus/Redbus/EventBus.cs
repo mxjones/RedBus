@@ -11,6 +11,17 @@ namespace Redbus
     /// </summary>
     public class EventBus : IEventBus
     {
+        public static EventBus DefaultInstance { get
+            {
+                if (_instance == null)
+                    lock (_syncRoot)
+                    {
+                        if (_instance == null)
+                            _instance = new EventBus();
+                    }
+                return _instance;
+            }
+        }
         public EventBus()
         {
             _subscriptions = new Dictionary<Type, List<ISubscription>>();
@@ -141,5 +152,7 @@ namespace Redbus
 
         private readonly Dictionary<Type, List<ISubscription>> _subscriptions;
         private static readonly object SubscriptionsLock = new object();
+        private static EventBus _instance;
+        private static object _syncRoot = new object();
     }
 }
