@@ -1,1 +1,1 @@
-.\src\Nuget\NuGet.exe pack .\src\Redbus\Redbus\Redbus.csproj 
+.\src\Nuget\NuGet.exe pack .\src\ScarletBus\ScarletBus\ScarletBus.csproj 
