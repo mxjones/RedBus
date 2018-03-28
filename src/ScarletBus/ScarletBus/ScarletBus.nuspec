@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>ScarletBus</id>
+    <version>1.0.5</version>    
+    <authors>Max Jones, Ilya Chidyakin</authors>
+    <owners>Max Jones</owners>
+    <projectUrl>https://github.com/turboslon/ScarletBus</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Simple EventBus for C#</description>    
+    <copyright>Copyright 2015-2018 Max Jones, Ilya Chidyakin</copyright>
+    <tags>eventbus,pubsub,messagebus,aggregator</tags>
+  </metadata>
+</package>

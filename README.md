@@ -1,5 +1,6 @@
-# RedBus
+# ScarletBus
 A simple EventBus / MessageBus library in C#
+It's a fork of https://github.com/mxjones/RedBus
 
 # Example Usage
 
@@ -36,8 +37,7 @@ private void OnIntEvent(PayloadEvent<int> intEvent)
 }
 ```
 
-Note that RedBus does not have WeakReferences implemented, so you must explicitly call Unsubscribe for the event when disposing
-the subscriber to avoid memory leaks. The Subscribe method returns a SubscriptionToken, this is used when unsubscribing.
+ScarletBus implements WeakReferences, so it's not required to explicitly call Unsubscribe for the event when disposing the subscriber. The Subscribe method returns a SubscriptionToken, this is used when unsubscribing.
 
 ```csharp
 
@@ -71,5 +71,5 @@ payloadEvent.Publish(eventBus);
 
 # Nuget
 
-Install-Package Redbus 
-(https://www.nuget.org/packages/Redbus)
+Install-Package ScarletBus 
+(https://www.nuget.org/packages/ScarletBus)
