@@ -1,5 +1,6 @@
 # ScarletBus
 A simple EventBus / MessageBus library in C#
+It's a fork of https://github.com/mxjones/RedBus
 
 # Example Usage
 
