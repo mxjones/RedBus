@@ -1,6 +1,5 @@
 # RedBus
-A simple in memory EventBus / MessageBus library in C#
-No dependencies
+A simple in memory EventBus / MessageBus library in C# with no dependencies
 
 # Example Usage
 
