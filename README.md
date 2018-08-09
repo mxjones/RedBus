@@ -1,6 +1,20 @@
 # RedBus
 A simple in memory EventBus / MessageBus library in C# with no dependencies
 
+[![Build status](https://ci.appveyor.com/api/projects/status/aeoqsovbx5k7vfxg?svg=true)](https://ci.appveyor.com/project/mxjones/redbus)
+
+
+# Nuget
+```
+Install-Package Redbus 
+```
+
+[![NuGet](https://img.shields.io/nuget/v/Redbus.svg)](https://www.nuget.org/packages/Redbus/)
+
+# Supported Frameworks
+* .NET Framework 4.5
+* .NET Standard 2.0
+
 # Example Usage
 
 There is a generic PayloadEvent class that can be used, or you can use any custom classes that derive from EventBase
@@ -67,9 +81,3 @@ var payloadEvent = new PayloadEvent<string>("Hello");
 payloadEvent.Publish(eventBus);
 
 ```
-
-
-# Nuget
-
-Install-Package Redbus 
-(https://www.nuget.org/packages/Redbus)
