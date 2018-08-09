@@ -7,8 +7,12 @@
     <owners>Max Jones</owners>
     <projectUrl>https://github.com/mxjones/RedBus</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Simple EventBus for C#</description>    
-    <copyright>Copyright 2015</copyright>
+    <description>Simple in memory EventBus for C#</description>    
+    <copyright>Copyright 2015-2018</copyright>
     <tags>eventbus,pubsub,messagebus,aggregator</tags>
   </metadata>
+  <files>
+    <file src="bin\Release\net45\Redbus.dll" target="lib\net45\Redbus.dll" />
+	<file src="bin\Release\netstandard2.0\Redbus.dll" target="lib\netstandard2.0\Redbus.dll" />
+</files>
 </package>
