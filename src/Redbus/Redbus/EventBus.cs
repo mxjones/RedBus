@@ -83,7 +83,7 @@ namespace Redbus
                 {
                     subscription.Publish(eventItem);
                 }
-                catch (Exception exception)
+                catch (Exception)
                 {
                 }
             }
