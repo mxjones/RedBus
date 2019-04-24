@@ -11,7 +11,7 @@ namespace Redbus.Tests
     {
         // Naive baseline to see changes for now
 
-        [TestMethod]
+        //[TestMethod]
         public void NaivePublishPerformanceTest()
         {
             var eventBus = new EventBus();
@@ -26,11 +26,10 @@ namespace Redbus.Tests
 
             Debug.WriteLine($"Finished in {sw.ElapsedMilliseconds}ms");
             Assert.IsTrue(sw.Elapsed < TimeSpan.FromSeconds(1), $"NaivePublishPerformanceTest took {sw.ElapsedMilliseconds}ms");
-            
             Console.WriteLine($"[DEBUG] NaivePublishPerformanceTest took {sw.ElapsedMilliseconds}ms");
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void NaiveConcurrentPublishPerformanceTest()
         {
             var eventBus = new EventBus();
@@ -65,7 +64,6 @@ namespace Redbus.Tests
             }
             mainSw.Stop();
             Assert.IsTrue(mainSw.Elapsed < TimeSpan.FromSeconds(2), $"NaivePublishPerformanceTest took {mainSw.ElapsedMilliseconds}ms");
-
         }
 
         private void CustomTestEventHandler(CustomTestEvent customTestEvent)
