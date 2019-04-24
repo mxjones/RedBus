@@ -8,7 +8,7 @@
     <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <Authors>mxjones</Authors>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/mxjones/RedBus/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>Copyright 2015-2018</Copyright>
     <PackageTags>eventbus pubsub messagebus aggregator redbus messaging bus</PackageTags>
     <RepositoryUrl>https://github.com/mxjones/RedBus</RepositoryUrl>
