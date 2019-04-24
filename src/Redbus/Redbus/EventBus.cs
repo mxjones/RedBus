@@ -69,11 +69,11 @@ namespace Redbus
             if (eventItem == null)
                 throw new ArgumentNullException(nameof(eventItem));
 
-            List<ISubscription> allSubscriptions = new List<ISubscription>();
+            var allSubscriptions = new List<ISubscription>();
             lock (SubscriptionsLock)
             {
                 if (_subscriptions.ContainsKey(typeof(TEventBase)))
-                    allSubscriptions = _subscriptions[typeof(TEventBase)];
+                    allSubscriptions = _subscriptions[typeof(TEventBase)].ToList();
             }
 
             for (var index = 0; index < allSubscriptions.Count; index++)

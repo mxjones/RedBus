@@ -14,7 +14,7 @@
     <RepositoryUrl>https://github.com/mxjones/RedBus</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PostBuildEvent></PostBuildEvent>
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
     <Description>A simple in memory EventBus / MessageBus library in C#</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
