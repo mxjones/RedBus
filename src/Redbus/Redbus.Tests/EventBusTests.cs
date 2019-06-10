@@ -121,7 +121,6 @@ namespace Redbus.Tests
         [TestMethod]
         public void PublishThrowSubscriberExceptionTest()
         {
-            // Subscribe to something that throws exceptions and other subscribers are not hit
             var eventBus = new EventBus(new EventBusConfiguration { ThrowSubscriberException = true });
             bool firstSubscriberHit = false, thirdSubscriberHit = false;
             eventBus.Subscribe<CustomTestEvent>(s => { firstSubscriberHit = true; });
