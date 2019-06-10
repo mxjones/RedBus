@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Redbus.Configuration;
 using Redbus.Events;
 using Redbus.Interfaces;
 
@@ -11,8 +12,10 @@ namespace Redbus
     /// </summary>
     public class EventBus : IEventBus
     {
-        public EventBus()
+        private readonly IEventBusConfiguration _eventBusConfiguration;
+        public EventBus(IEventBusConfiguration configuration = null)
         {
+            _eventBusConfiguration = configuration ?? EventBusConfiguration.Default;
             _subscriptions = new Dictionary<Type, List<ISubscription>>();
         }
 
@@ -85,6 +88,8 @@ namespace Redbus
                 }
                 catch (Exception)
                 {
+                    if (_eventBusConfiguration.ThrowSubscriberException)
+                        throw;
                 }
             }
         }

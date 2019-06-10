@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Redbus.Configuration;
 using Redbus.Events;
 
 namespace Redbus.Tests
@@ -113,6 +116,37 @@ namespace Redbus.Tests
             eventBus.Unsubscribe(token);
             eventBus.Unsubscribe(token);
             eventBus.Unsubscribe(token);
+        }
+
+        [TestMethod]
+        public void PublishThrowSubscriberExceptionTest()
+        {
+            // Subscribe to something that throws exceptions and other subscribers are not hit
+            var eventBus = new EventBus(new EventBusConfiguration { ThrowSubscriberException = true });
+            bool firstSubscriberHit = false, thirdSubscriberHit = false;
+            eventBus.Subscribe<CustomTestEvent>(s => { firstSubscriberHit = true; });
+            eventBus.Subscribe<CustomTestEvent>(s => throw new ApplicationException($"Subscriber error"));
+            eventBus.Subscribe<CustomTestEvent>(s => { thirdSubscriberHit = true; });
+
+            var thrownException = Assert.ThrowsException<ApplicationException>(() => eventBus.Publish(new CustomTestEvent())); // Subscriber exception is thrown
+            Assert.AreEqual("Subscriber error", thrownException.Message); // Verify correct message from subscriber
+            Assert.IsTrue(firstSubscriberHit); // The first subscriber will be hit
+            Assert.IsFalse(thirdSubscriberHit); // Third subscriber will not be hit, missed due to thrown exception.
+        }
+
+        [TestMethod]
+        public void PublishDontThrowSubscriberExceptionTest()
+        {
+            var eventBus = new EventBus(); // Default ThrowSubscriberException = false
+            bool firstSubscriberHit = false, thirdSubscriberHit = false;
+            eventBus.Subscribe<CustomTestEvent>(s => { firstSubscriberHit = true; });
+            eventBus.Subscribe<CustomTestEvent>(s => throw new ApplicationException($"Subscriber error"));
+            eventBus.Subscribe<CustomTestEvent>(s => { thirdSubscriberHit = true; });
+            eventBus.Publish(new CustomTestEvent());
+
+            // No Exception thrown, subscribers are hit.
+            Assert.IsTrue(firstSubscriberHit); // The first subscriber will be hit
+            Assert.IsTrue(thirdSubscriberHit); // Third subscriber will be hit, because we didn't throw.
         }
 
         private void CustomTestEventMethodHandler(CustomTestEvent customTestEvent)
