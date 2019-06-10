@@ -1,4 +1,6 @@
-﻿namespace Redbus.Configuration
+﻿using Redbus.Interfaces;
+
+namespace Redbus.Configuration
 {
     public class EventBusConfiguration : IEventBusConfiguration
     {

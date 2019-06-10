@@ -1,4 +1,4 @@
-﻿namespace Redbus.Configuration
+﻿namespace Redbus.Interfaces
 {
     public interface IEventBusConfiguration
     {
