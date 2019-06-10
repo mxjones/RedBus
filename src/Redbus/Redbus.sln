@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbus", "Redbus\Redbus.csproj", "{80768212-79B9-45D7-84B4-B4CD8524F470}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbus", "Redbus\Redbus.csproj", "{80768212-79B9-45D7-84B4-B4CD8524F470}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbus.Tests", "Redbus.Tests\Redbus.Tests.csproj", "{6A21EFEB-3120-4C3A-980B-748D5DEABD7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbus.Demo.Net45.App", "Redbus.Demo.Net45.App\Redbus.Demo.Net45.App.csproj", "{820AE456-04BC-46AA-866F-EA6991B46A72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbus.Demo.NetCore21.App", "Redbus.Demo.NetCore21.App\Redbus.Demo.NetCore21.App.csproj", "{9199124F-D8D6-41F5-BBA2-C1EB03143421}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{6A21EFEB-3120-4C3A-980B-748D5DEABD7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A21EFEB-3120-4C3A-980B-748D5DEABD7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A21EFEB-3120-4C3A-980B-748D5DEABD7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{820AE456-04BC-46AA-866F-EA6991B46A72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{820AE456-04BC-46AA-866F-EA6991B46A72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{820AE456-04BC-46AA-866F-EA6991B46A72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{820AE456-04BC-46AA-866F-EA6991B46A72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9199124F-D8D6-41F5-BBA2-C1EB03143421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9199124F-D8D6-41F5-BBA2-C1EB03143421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9199124F-D8D6-41F5-BBA2-C1EB03143421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9199124F-D8D6-41F5-BBA2-C1EB03143421}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
