@@ -65,7 +65,7 @@ eventBus.Unsubscribe(token);
 
 ```
 
-Extensions
+# Extensions
 
 ```csharp
 
@@ -79,5 +79,20 @@ token.Unsubscribe(eventBus)
 
 var payloadEvent = new PayloadEvent<string>("Hello");
 payloadEvent.Publish(eventBus);
+
+```
+
+# Configuration
+
+* ThrowSubscriberException  
+  
+By default, Redbus will catch and swallow any exceptions thrown by subscribers.
+It's possible to configure Redbus to rethrow any exceptions which occurred in a subscriber method - please note the following:  
+  * This will cause an exception from a subscriber to be thrown for a publisher  
+  * This will/may cause subsequent subscribers to *not* receive an event/message after a subscriber has thrown an exception.
+
+```csharp
+
+IEventBus eventBus = new EventBus(new EventBusConfiguration { ThrowSubscriberException = true });
 
 ```
