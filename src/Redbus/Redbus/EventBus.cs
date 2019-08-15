@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Redbus.Configuration;
 using Redbus.Events;
 using Redbus.Interfaces;
@@ -118,11 +119,28 @@ namespace Redbus
         }
 
         #region PRIVATE METHODS
-
         private void PublishAsyncInternal<TEventBase>(TEventBase eventItem, AsyncCallback callback) where TEventBase : EventBase
         {
-            Action publishAction = () => Publish(eventItem);
-            publishAction.BeginInvoke(callback, null);
+            Task<bool> publishTask = new Task<bool>(() =>
+            {
+                Publish(eventItem);
+                return true;
+            });
+            publishTask.Start();
+            if (callback == null)
+                return;
+
+            var tcs = new TaskCompletionSource<bool>();
+            publishTask.ContinueWith(t =>
+            {
+                if (t.IsFaulted)
+                    tcs.TrySetException(t.Exception.InnerExceptions);
+                else if (t.IsCanceled)
+                    tcs.TrySetCanceled();
+                else
+                    tcs.TrySetResult(t.Result);
+                callback?.Invoke(tcs.Task);
+            }, TaskScheduler.Default);
         }
 
         #endregion
