@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Redbus.Configuration;
 using Redbus.Events;
+using System;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace Redbus.Tests
 {
@@ -27,7 +27,19 @@ namespace Redbus.Tests
             eventBus.Subscribe<CustomTestEvent>(CustomTestEventMethodHandler);
 
             Assert.IsFalse(_methodHandlerHit);
-            eventBus.Publish(new CustomTestEvent { Name = "Custom Event", Identifier = 1});
+            eventBus.Publish(new CustomTestEvent { Name = "Custom Event", Identifier = 1 });
+            Assert.IsTrue(_methodHandlerHit);
+        }
+
+        [TestMethod]
+        public void SubscribeAndPublishAsyncCustomEventMethodTest()
+        {
+            var eventBus = new EventBus();
+            eventBus.Subscribe<CustomTestEvent>(CustomTestEventMethodHandler);
+
+            Assert.IsFalse(_methodHandlerHit);
+            eventBus.PublishAsync(new CustomTestEvent { Name = "Custom Event", Identifier = 1 });
+            Thread.Sleep(500);
             Assert.IsTrue(_methodHandlerHit);
         }
 
@@ -74,7 +86,7 @@ namespace Redbus.Tests
                 customTestEventResults.Add(s);
             });
 
-            eventBus.Publish(new CustomTestEvent { Name = "Custom Test Event", Identifier = 1});
+            eventBus.Publish(new CustomTestEvent { Name = "Custom Test Event", Identifier = 1 });
             eventBus.Publish(new CustomTestEvent { Name = "Custom Test Event", Identifier = 2 });
             eventBus.Publish(new CustomTestEvent { Name = "Custom Test Event", Identifier = 3 });
             eventBus.Publish(new CustomTestEvent { Name = "Custom Test Event", Identifier = 4 });
@@ -98,7 +110,7 @@ namespace Redbus.Tests
             {
                 Assert.Fail("This should not be executed due to unsubscribing.");
             });
-            
+
             eventBus.Unsubscribe(token);
             eventBus.Publish(new CustomTestEvent { Name = "Custom Event 3", Identifier = 3 });
         }

@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbus.Tests", "Redbus.Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbus.Demo.Net45.App", "Redbus.Demo.Net45.App\Redbus.Demo.Net45.App.csproj", "{820AE456-04BC-46AA-866F-EA6991B46A72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redbus.Demo.NetCore21.App", "Redbus.Demo.NetCore21.App\Redbus.Demo.NetCore21.App.csproj", "{9199124F-D8D6-41F5-BBA2-C1EB03143421}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redbus.Demo.NetCore21.App", "Redbus.Demo.NetCore21.App\Redbus.Demo.NetCore21.App.csproj", "{9199124F-D8D6-41F5-BBA2-C1EB03143421}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

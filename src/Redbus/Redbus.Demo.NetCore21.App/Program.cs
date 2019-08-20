@@ -23,6 +23,11 @@ namespace Redbus.Demo.NetCore21.App
 
             eventBus.Publish(new PayloadEvent<string>("Hello"));
 
+
+            eventBus.PublishAsync(new PayloadEvent<int>(5)); // OnIntEvent will be invoked
+            eventBus.PublishAsync(new CustomEventClass()); // OnCustomEvent will be invoked
+            eventBus.PublishAsync(new PayloadEvent<string>("Hello"));
+
             Console.ReadKey();
         }
 
