@@ -31,6 +31,7 @@ namespace Redbus.Tests
             Assert.IsTrue(_methodHandlerHit);
         }
 
+
         [TestMethod]
         public void SubscribeAndPublishAsyncCustomEventMethodTest()
         {
@@ -74,6 +75,23 @@ namespace Redbus.Tests
             eventBus.Publish(new PayloadEvent<int>(999));
             Assert.IsTrue(_actionHandlerHit);
         }
+
+        [TestMethod]
+        public void SubscribeAndPublishAsyncBuiltInEventActionTest()
+        {
+            var eventBus = new EventBus();
+            eventBus.Subscribe<PayloadEvent<int>>(s =>
+            {
+                Assert.AreEqual(999, s.Payload);
+                _actionHandlerHit = true;
+            });
+
+            Assert.IsFalse(_actionHandlerHit);
+            eventBus.PublishAsync(new PayloadEvent<int>(999));
+            Thread.Sleep(500);
+            Assert.IsTrue(_actionHandlerHit);
+        }
+
 
         [TestMethod]
         public void PublishInCorrectOrderTest()
