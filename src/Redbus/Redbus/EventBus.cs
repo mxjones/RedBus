@@ -76,8 +76,8 @@ namespace Redbus
             var allSubscriptions = new List<ISubscription>();
             lock (SubscriptionsLock)
             {
-                if (_subscriptions.ContainsKey(typeof(TEventBase)))
-                    allSubscriptions = _subscriptions[typeof(TEventBase)].ToList();
+                if (_subscriptions.ContainsKey(eventItem.GetType()))
+                    allSubscriptions = _subscriptions[eventItem.GetType()].ToList();
             }
 
             for (var index = 0; index < allSubscriptions.Count; index++)
