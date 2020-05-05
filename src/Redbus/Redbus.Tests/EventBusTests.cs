@@ -178,6 +178,18 @@ namespace Redbus.Tests
             Assert.IsTrue(thirdSubscriberHit); // Third subscriber will be hit, because we didn't throw.
         }
 
+        [TestMethod]
+        public void PublishCustomEventAsSubtype()
+        {
+            var eventBus = new EventBus();
+            bool subscriberHit = false;
+            eventBus.Subscribe<CustomTestEvent>(s => { subscriberHit = true; });
+
+            eventBus.Publish((EventBase)(new CustomTestEvent()));
+
+            Assert.IsTrue(subscriberHit);
+        }
+
         private void CustomTestEventMethodHandler(CustomTestEvent customTestEvent)
         {
             Assert.AreEqual("Custom Event", customTestEvent.Name);
